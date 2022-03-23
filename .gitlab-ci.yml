@@ -1,7 +1,7 @@
 stages:
   - build
   - scan
-  - retag
+  - package
 
 variables:
   ARTIFACT_COMPRESSION_LEVEL: "fast"
@@ -14,7 +14,7 @@ set-vars:
     - cat .env >> build.env
     - source build.env
     - >
-      echo "IMAGE_NAME=${INTERNAL_REG}/nasa-gcmd:${VERSION}-${CI_COMMIT_REF_NAME}"
+      echo "IMAGE_NAME=${INTERNAL_REG}/nasa-gcmd:${APP_VERSION}-${CI_COMMIT_REF_NAME}"
       >> build.env
   artifacts:
     reports:
@@ -26,7 +26,6 @@ image-build:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   before_script:
-    - . .env
     - >
       echo "${IMAGE_REGISTRY_CA_CERT}"
       | base64 -d >> /kaniko/ssl/certs/ca-certificates.crt
@@ -40,7 +39,6 @@ image-build:
       /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
-      --target prod
       --cache=true
       --destination "${IMAGE_NAME}-unverified"
       --build-arg APP_VERSION="${APP_VERSION}"
@@ -68,7 +66,7 @@ image-scan:
     - >
       time trivy --cache-dir .trivycache/ image --exit-code 0 --ignore-unfixed
       --no-progress --format template --template "@/contrib/gitlab.tpl"
-      --output "$CI_PROJECT_DIR/gl-container-scanning-report.json"
+      --output "$CI_PROJECT_DIR/img-scan-report.json"
       "$IMAGE_NAME-unverified"
     # Print full report
     - >
@@ -86,27 +84,26 @@ image-scan:
   artifacts:
     when: always
     reports:
-      container_scanning: gl-container-scanning-report.json
+      container_scanning: img-scan-report.json
 
 image-retag:
-  stage: retag
-  image:
-    name: quay.io/skopeo/stable:v1.5.2
-    entrypoint: [""]
+  stage: package
+  image: docker.io/regclient/regctl:v0.3-alpine
   variables:
     GIT_STRATEGY: none
   before_script:
+    - export REG_HOST=${INTERNAL_REG%/*}
     - >
-      echo "${IMAGE_REGISTRY_CA_CERT}"
-      | base64 -d >> /etc/ssl/certs/ca-bundle.crt
-    - >
-      echo "${IMAGE_REGISTRY_PASS}" | skopeo login
-      -u "${IMAGE_REGISTRY_USER}" --password-stdin "${INTERNAL_REG}"
+      echo "{\"hosts\":{\"${REG_HOST}\":{\"tls\":\"enabled\",\"regcert\":
+      \"$(printf "%s" "${IMAGE_REGISTRY_CERT}" | base64 -d
+      | awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}')\",\"hostname\":
+      \"${REG_HOST}\",\"user\":\"${IMAGE_REGISTRY_USER}\",\"pass\":
+      \"${IMAGE_REGISTRY_PASS}\"}}}" >> /home/appuser/.regctl/config.json
   script:
     - >
-      skopeo --debug copy
-      "docker://${IMAGE_NAME}-unverified"
-      "docker://${IMAGE_NAME}"
+      regctl --verbosity debug image copy
+      "${IMAGE_NAME}-unverified" "${IMAGE_NAME}"
     - >
-      skopeo --debug delete
-      "docker://${IMAGE_NAME}-unverified"
+      regctl --verbosity debug image copy
+      "${IMAGE_NAME}" "${INTERNAL_REG}/nasa-gcmd:latest"
+    - regctl --verbosity debug tag delete "${IMAGE_NAME}-unverified"

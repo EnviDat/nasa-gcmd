@@ -10,7 +10,12 @@ from time import sleep
 from botocore.config import Config
 
 
-def _download_s3_object_to_memory(path: str) -> BytesIO:
+log = logging.getLogger(__name__)
+
+
+def _download_s3_object_to_memory(
+    path: str, bucket: "boto3.resource.Bucket"
+) -> BytesIO:
     """
     Download an S3 object into a binary memory file.
 
@@ -188,23 +193,29 @@ def generate_index_html(package_names: list) -> BytesIO:
     return buf
 
 
-get_logger()
-log = logging.getLogger(__name__)
+def main():
+    "Main script logic."
 
-bucket = get_s3_bucket()
-packages_in_ckan = get_package_list_from_ckan()
-packages_in_s3 = [os.path.splitext(file.key)[0] for file in bucket.objects.all()]
-missing_packages = list(set(packages_in_ckan) - set(packages_in_s3))
-log.info(f"Found {len(missing_packages)} missing packages in bucket.")
+    get_logger()
 
-for package_name in missing_packages:
-    transfer_package_xml_to_s3(package_name, bucket)
-    # Take it easy on the API!
-    log.debug("Sleeping 5 seconds...")
-    sleep(5)
+    bucket = get_s3_bucket()
+    packages_in_ckan = get_package_list_from_ckan()
+    packages_in_s3 = [os.path.splitext(file.key)[0] for file in bucket.objects.all()]
+    missing_packages = list(set(packages_in_ckan) - set(packages_in_s3))
+    log.info(f"Found {len(missing_packages)} missing packages in bucket.")
 
-# Create index.html
-index_html = generate_index_html(packages_in_ckan)
-log.info("Uploading generated index.html to S3 bucket.")
-bucket.upload_fileobj(index_html, "index.html")
-log.info("Done.")
+    for package_name in missing_packages:
+        transfer_package_xml_to_s3(package_name, bucket)
+        # Take it easy on the API!
+        log.debug("Sleeping 5 seconds...")
+        sleep(5)
+
+    # Create index.html
+    index_html = generate_index_html(packages_in_ckan)
+    log.info("Uploading generated index.html to S3 bucket.")
+    bucket.upload_fileobj(index_html, "index.html")
+    log.info("Done.")
+
+
+if __name__ == "__main__":
+    main()
