@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "docker-compose: down",
+      "type": "shell",
+      "command": "docker compose down --remove-orphans"
+    },
+    {
+      "label": "docker-copy: mount",
+      "type": "shell",
+      "dependsOn": ["docker-compose: down"],
+      "command": "docker compose run -d --name helper --entrypoint 'bash -c' app 'sleep infinity'"
+    },
+    {
+      "label": "docker-copy: code",
+      "type": "shell",
+      "dependsOn": ["docker-copy: mount"],
+      "command": "docker cp main.py helper:/opt/app && docker compose down --remove-orphans"
+    },
+    {
+      "label": "docker-compose: up",
+      "type": "shell",
+      "dependsOn": ["docker-copy: code"],
+      "command": "docker compose up -d --no-build app"
+    }
+  ]
+}

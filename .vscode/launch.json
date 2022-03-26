@@ -1,0 +1,27 @@
+{
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python - Remote Debug",
+      "type": "python",
+      "preLaunchTask": "docker-compose: up",
+      "request": "attach",
+      "host": "nasa_gcmd",
+      "port": 5678,
+      "pathMappings": [
+        {
+          "localRoot": "${workspaceFolder}",
+          "remoteRoot": "/opt/app"
+        }
+      ],
+      "justMyCode": false
+    }
+  ]
+}

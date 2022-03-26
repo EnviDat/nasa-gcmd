@@ -72,7 +72,7 @@ COPY --from=build \
     /opt/python/
 ENV PATH="/opt/python/.venv/bin:$PATH"
 WORKDIR /opt/app
-COPY . .
+COPY main.py .
 
 # Upgrade pip & pre-compile deps to .pyc, add appuser, permissions
 RUN /opt/python/.venv/bin/python -m pip install --no-cache-dir --upgrade pip \
@@ -81,5 +81,16 @@ RUN /opt/python/.venv/bin/python -m pip install --no-cache-dir --upgrade pip \
     && chown -R appuser:appuser /opt
 
 ENTRYPOINT ["python"]
-CMD ["/opt/app/main.py"]
 USER appuser
+
+
+
+FROM runtime as debug
+RUN pip install --no-cache-dir debugpy
+ENTRYPOINT ["python", "-m", "debugpy", "--wait-for-client", "--listen", "0.0.0.0:5678"]
+CMD ["/opt/app/main.py"]
+
+
+
+FROM runtime as prod
+CMD ["/opt/app/main.py"]

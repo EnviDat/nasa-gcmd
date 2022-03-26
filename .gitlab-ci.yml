@@ -39,6 +39,7 @@ image-build:
       /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --target=prod
       --cache=true
       --destination "${IMAGE_NAME}-unverified"
       --build-arg APP_VERSION="${APP_VERSION}"
