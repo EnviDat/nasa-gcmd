@@ -213,7 +213,9 @@ def main():
     # Create index.html
     index_html = generate_index_html(packages_in_ckan)
     log.info("Uploading generated index.html to S3 bucket.")
-    bucket.upload_fileobj(index_html, "index.html")
+    bucket.upload_fileobj(
+        index_html, "index.html", ExtraArgs={"ContentType": "text/html"}
+    )
     log.info("Done.")
 
 
