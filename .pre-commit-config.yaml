@@ -1,4 +1,11 @@
 repos:
+  # Versioning: Commit Messages & Changelog
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: master
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
+
   # Autoupdate: Python code
   - repo: https://github.com/asottile/pyupgrade
     rev: v2.29.1
@@ -8,7 +15,7 @@ repos:
 
   # Autoformat: Python code
   - repo: https://github.com/psf/black
-    rev: 21.11b1
+    rev: 22.3.0
     hooks:
       - id: black
         args: [--target-version=py39]

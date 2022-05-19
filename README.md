@@ -11,23 +11,36 @@ Code to make EnviDat data accessible via NASA Earthdata scrapers.
 - Build the debug image:
   `docker compose build`
 
-- Create .app.secret:
+- Create .env.secret:
 
   ```env
   LOG_LEVEL=DEBUG
+  API_URL=xxx
   AWS_ENDPOINT=xxx
   AWS_REGION=xxx
   AWS_ACCESS_KEY=xxx
   AWS_SECRET_KEY=xxx
-  AWS_BUCKET_NAME=xxx
-  CKAN_HOST=xxx
   ```
 
 - Run via VSCode debug menu.
+
+2a. Local Debug
+
+- Install `pdm` and enable pep582 support `pdm --pep582`.
+- Install project dependencies `pdm install`
+- Run with IDE debugger
+
+2b. Remote Debug
+
+- Build the debug image:
+  `docker compose build`
+- Start the container:
+  `docker compose up -d`
+- Run remote debugging via IDE (VSCode) debug menu.
 
 ## Production
 
 - Create the required secrets in the `cron` namespace.
 - Push the latest code.
 - Watch the build pipeline run in Gitlab.
-- Deploy the cronjob from the `k8s-cron` repo.
+- Cronjob from the `k8s-cron` repo runs on schedule, using built image.

@@ -1,17 +1,17 @@
 ARG EXTERNAL_REG
 ARG INTERNAL_REG
-ARG PYTHON_VERSION
+ARG PYTHON_IMG_TAG
 FROM ${INTERNAL_REG}/debian:bullseye as certs
 
 
 
-FROM ${EXTERNAL_REG}/python:${PYTHON_VERSION}-slim-bullseye as base
+FROM ${EXTERNAL_REG}/python:${PYTHON_IMG_TAG}-slim-bullseye as base
 
 ARG APP_VERSION
-ARG PYTHON_VERSION
+ARG PYTHON_IMG_TAG
 ARG MAINTAINER
 LABEL envidat.ch.app-version="${APP_VERSION}" \
-      envidat.ch.python-img-tag="${PYTHON_VERSION}" \
+      envidat.ch.python-img-tag="${PYTHON_IMG_TAG}" \
       envidat.ch.maintainer="${MAINTAINER}"
 
 # CA-Certs
@@ -46,11 +46,10 @@ RUN set -ex \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/python
-COPY Pipfile /opt/python/
+COPY pyproject.toml pdm.lock /opt/python/
 RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir pipenv==11.9.0 \
-    && PIPENV_VENV_IN_PROJECT=1 pipenv install \
-    && rm /opt/python/Pipfile /opt/python/Pipfile.lock
+    && pip install --no-cache-dir pdm
+RUN pdm install --prod --no-lock --no-editable
 
 
 
@@ -67,30 +66,33 @@ RUN set -ex \
             curl \
     && rm -rf /var/lib/apt/lists/*
 
+ARG PYTHON_IMG_TAG
 COPY --from=build \
-    /opt/python/ \
-    /opt/python/
-ENV PATH="/opt/python/.venv/bin:$PATH"
+    "/opt/python/__pypackages__/${PYTHON_IMG_TAG}/lib" \
+    /opt/python/pkgs
+ENV PYTHONPATH="/opt/python/pkgs"
 WORKDIR /opt/app
-COPY main.py .
+COPY main.py ./
 
 # Upgrade pip & pre-compile deps to .pyc, add appuser, permissions
-RUN /opt/python/.venv/bin/python -m pip install --no-cache-dir --upgrade pip \
+RUN python -m pip install --no-cache-dir --upgrade pip \
     && python -c "import compileall; compileall.compile_path(maxlevels=10, quiet=1)" \
     && useradd -r -u 900 -m -c "unprivileged account" -d /home/appuser -s /bin/false appuser \
     && chown -R appuser:appuser /opt
 
-ENTRYPOINT ["python"]
-USER appuser
-
 
 
 FROM runtime as debug
-RUN pip install --no-cache-dir debugpy
+COPY pyproject.toml pdm.lock /opt/python/
+RUN pip install --no-cache-dir debugpy pdm \
+    && pdm install --dev --no-lock --no-editable
+USER appuser
 ENTRYPOINT ["python", "-m", "debugpy", "--wait-for-client", "--listen", "0.0.0.0:5678"]
 CMD ["/opt/app/main.py"]
 
 
 
 FROM runtime as prod
+USER appuser
+ENTRYPOINT ["python"]
 CMD ["/opt/app/main.py"]

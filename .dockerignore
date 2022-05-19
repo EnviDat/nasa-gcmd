@@ -3,4 +3,5 @@
 
 # Allow files and directories
 !*.py
-!*Pipfile
+!pyproject.toml
+!pdm.lock
