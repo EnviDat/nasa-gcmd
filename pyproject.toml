@@ -6,7 +6,7 @@ authors = [
     {name = "Sam Woodcock", email = "samuel.woodcock@wsl.ch"},
 ]
 dependencies = [
-    "envidat-utils[dotenv]>=0.3.0",
+    "envidat-utils[dotenv]==1.0.3",
 ]
 requires-python = ">=3.9"
 license = {text = "MIT"}
