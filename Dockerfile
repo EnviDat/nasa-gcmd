@@ -48,8 +48,9 @@ RUN set -ex \
 WORKDIR /opt/python
 COPY pyproject.toml pdm.lock /opt/python/
 RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir pdm
-RUN pdm install --prod --no-lock --no-editable
+    && pip install --no-cache-dir pdm==2.0.2 \
+    && pdm config python.use_venv false
+RUN pdm install --prod --no-editable
 
 
 
@@ -84,8 +85,9 @@ RUN python -m pip install --no-cache-dir --upgrade pip \
 
 FROM runtime as debug
 COPY pyproject.toml pdm.lock /opt/python/
-RUN pip install --no-cache-dir debugpy pdm \
-    && pdm install --dev --no-lock --no-editable
+RUN pip install --no-cache-dir debugpy pdm==2.0.2 \
+    && pdm config python.use_venv false \
+    && pdm install --dev --no-editable
 USER appuser
 ENTRYPOINT ["python", "-m", "debugpy", "--wait-for-client", "--listen", "0.0.0.0:5678"]
 CMD ["/opt/app/main.py"]
