@@ -1,17 +1,17 @@
 [[package]]
 name = "boto3"
-version = "1.23.3"
+version = "1.24.34"
 requires_python = ">= 3.7"
 summary = "The AWS SDK for Python"
 dependencies = [
-    "botocore<1.28.0,>=1.27.27",
+    "botocore<1.28.0,>=1.27.34",
     "jmespath<2.0.0,>=0.7.1",
     "s3transfer<0.7.0,>=0.6.0",
 ]
 
 [[package]]
 name = "botocore"
-version = "1.27.27"
+version = "1.27.34"
 requires_python = ">= 3.7"
 summary = "Low-level, data-driven core of boto 3."
 dependencies = [
@@ -22,15 +22,21 @@ dependencies = [
 
 [[package]]
 name = "certifi"
-version = "2022.5.18"
+version = "2022.6.15"
 requires_python = ">=3.6"
 summary = "Python package for providing Mozilla's CA Bundle."
 
 [[package]]
 name = "charset-normalizer"
-version = "2.0.12"
+version = "2.1.0"
 requires_python = ">=3.6.0"
 summary = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
+
+[[package]]
+name = "debugpy"
+version = "1.6.2"
+requires_python = ">=3.7"
+summary = "An implementation of the Debug Adapter Protocol for Python"
 
 [[package]]
 name = "envidat-utils"
@@ -61,7 +67,7 @@ summary = "Internationalized Domain Names in Applications (IDNA)"
 
 [[package]]
 name = "jmespath"
-version = "1.0.0"
+version = "1.0.1"
 requires_python = ">=3.7"
 summary = "JSON Matching Expressions"
 
@@ -82,7 +88,7 @@ summary = "Read key-value pairs from a .env file and set them as environment var
 
 [[package]]
 name = "requests"
-version = "2.27.1"
+version = "2.28.1"
 requires_python = ">=3.7, <4"
 summary = "Python HTTP for Humans."
 dependencies = [
@@ -109,64 +115,84 @@ summary = "Python 2 and 3 compatibility utilities"
 
 [[package]]
 name = "urllib3"
-version = "1.26.9"
+version = "1.26.10"
 requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, <4"
 summary = "HTTP library with thread-safe connection pooling, file post, and more."
 
 [metadata]
-lock_version = "3.1"
-content_hash = "sha256:ed3b192924b3c4999561f9009459d0e3116d11557d0db8871faf77998bbf27c6"
+lock_version = "4.0"
+content_hash = "sha256:3d054830a60120572e22a39273086dc62adb1675c5239c39057078425ef7fc2a"
 
 [metadata.files]
-"boto3 1.23.3" = [
-    {file = "boto3-1.23.3-py3-none-any.whl", hash = "sha256:5f27eec9b0a43edbfb3ed5e748837b10219a972f0728fecd78f84ec3629f2092"},
-    {file = "boto3-1.23.3.tar.gz", hash = "sha256:9d5ce5ae3ddd4429cf752efe7c9f39691db6c85b6b5f1cfc8861b8f23b72b67a"},
+"boto3 1.24.34" = [
+    {url = "https://files.pythonhosted.org/packages/a3/57/01b02739ab40d3263543e066c76ad74593297251bb9fce02fa2d5cc97871/boto3-1.24.34-py3-none-any.whl", hash = "sha256:5d9bcc355cf6edd7f3849fedac4252e12a0aa2b436cdbc0d4371b16a0f852a30"},
+    {url = "https://files.pythonhosted.org/packages/44/75/a32655706a1dacd555596240f8df78a7d3c831c1ea0e34028c58d10176bc/boto3-1.24.34.tar.gz", hash = "sha256:5c775dcb12ca5d6be3f5aa3c49d77783faa64eb30fd3f4af93ff116bb42f9ffb"},
 ]
-"botocore 1.27.27" = [
-    {file = "botocore-1.27.27-py3-none-any.whl", hash = "sha256:524da451350c41e3136353183e7424c95952124163ea8ec03f57f29597bbcb4b"},
-    {file = "botocore-1.27.27.tar.gz", hash = "sha256:583b85f8a799fb89d1a762db041163b5848b08e79cee06b609bcaaeb69ea1fa6"},
+"botocore 1.27.34" = [
+    {url = "https://files.pythonhosted.org/packages/f9/23/2c55d2b7b09c1589731bcb5cfd271cdb45a0ea3afc53ec89eee374909e64/botocore-1.27.34-py3-none-any.whl", hash = "sha256:0d824a5315f5f5c3bea53c14107a69695ef43190edf647f1281bac8f172ca77c"},
+    {url = "https://files.pythonhosted.org/packages/1a/91/92ff234c04337368b793272a0eacb72e5ceab678aa857a2b5cee10967d2c/botocore-1.27.34.tar.gz", hash = "sha256:9c695d47f1f1212f3e306e51f7bacdf67e58055194ddcf7d8296660b124cf135"},
 ]
-"certifi 2022.5.18" = [
-    {file = "certifi-2022.5.18-py3-none-any.whl", hash = "sha256:8d15a5a7fde18536a249c49e07e8e462b8fc13de21b3c80e8a68315dfa227c99"},
-    {file = "certifi-2022.5.18.tar.gz", hash = "sha256:6ae10321df3e464305a46e997da41ea56c1d311fb9ff1dd4e04d6f14653ec63a"},
+"certifi 2022.6.15" = [
+    {url = "https://files.pythonhosted.org/packages/e9/06/d3d367b7af6305b16f0d28ae2aaeb86154fa91f144f036c2d5002a5a202b/certifi-2022.6.15-py3-none-any.whl", hash = "sha256:fe86415d55e84719d75f8b69414f6438ac3547d2078ab91b67e779ef69378412"},
+    {url = "https://files.pythonhosted.org/packages/cc/85/319a8a684e8ac6d87a1193090e06b6bbb302717496380e225ee10487c888/certifi-2022.6.15.tar.gz", hash = "sha256:84c85a9078b11105f04f3036a9482ae10e4621616db313fe045dd24743a0820d"},
 ]
-"charset-normalizer 2.0.12" = [
-    {file = "charset_normalizer-2.0.12-py3-none-any.whl", hash = "sha256:6881edbebdb17b39b4eaaa821b438bf6eddffb4468cf344f09f89def34a8b1df"},
-    {file = "charset-normalizer-2.0.12.tar.gz", hash = "sha256:2857e29ff0d34db842cd7ca3230549d1a697f96ee6d3fb071cfa6c7393832597"},
+"charset-normalizer 2.1.0" = [
+    {url = "https://files.pythonhosted.org/packages/93/1d/d9392056df6670ae2a29fcb04cfa5cee9f6fbde7311a1bb511d4115e9b7a/charset-normalizer-2.1.0.tar.gz", hash = "sha256:575e708016ff3a5e3681541cb9d79312c416835686d054a23accb873b254f413"},
+    {url = "https://files.pythonhosted.org/packages/94/69/64b11e8c2fb21f08634468caef885112e682b0ebe2908e74d3616eb1c113/charset_normalizer-2.1.0-py3-none-any.whl", hash = "sha256:5189b6f22b01957427f35b6a08d9a0bc45b46d3788ef5a92e978433c7a35f8a5"},
+]
+"debugpy 1.6.2" = [
+    {url = "https://files.pythonhosted.org/packages/61/6e/8e7739722bda839463cfca171af4a25592cf52a11297b6b0e221a69c61b4/debugpy-1.6.2-cp310-cp310-macosx_10_15_universal2.whl", hash = "sha256:77a47d596ce8c69673d5f0c9876a80cb5a6cbc964f3b31b2d44683c7c01b6634"},
+    {url = "https://files.pythonhosted.org/packages/9a/db/f157804b7370ee390107e91b21746cd3ee1b9de8490d9366b02a3c93427d/debugpy-1.6.2-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:726e5cc0ed5bc63e821dc371d88ddae5cba85e2ad207bf5fefc808b29421cb4c"},
+    {url = "https://files.pythonhosted.org/packages/c9/ab/92bd5474152c640a6aadf687cb6a24b616cea2c642552d4f31dd59d03fd3/debugpy-1.6.2-cp310-cp310-win32.whl", hash = "sha256:9809bd1cdc0026fab711e280e0cb5d8f89ae5f4f74701aba5bda9a20a6afb567"},
+    {url = "https://files.pythonhosted.org/packages/8d/87/ed7f9a30c7841630aa090fcacdac66e1af9e3b29375685db1d354a6191a4/debugpy-1.6.2-cp310-cp310-win_amd64.whl", hash = "sha256:40741d4bbf59baca1e97a5123514afcc036423caae5f24db23a865c0b4167c34"},
+    {url = "https://files.pythonhosted.org/packages/ee/36/621af2f5e4531d045924731027c0e5f107d768b694714ddf866468cafa1c/debugpy-1.6.2-cp37-cp37m-macosx_10_15_x86_64.whl", hash = "sha256:67749e972213c395647a8798cc8377646e581e1fe97d0b1b7607e6b112ae4511"},
+    {url = "https://files.pythonhosted.org/packages/45/4a/b1e214bfe56e76fcd21514cf9bb6199d2bb624b2267f824f618e09fd7dd9/debugpy-1.6.2-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:4e3c43d650a1e5fa7110af380fb59061bcba1e7348c00237e7473c55ae499b96"},
+    {url = "https://files.pythonhosted.org/packages/8d/d6/e96a022a5646f7273500cc6de9edc76aa0ef3593e3d311ea569a498f2fe2/debugpy-1.6.2-cp37-cp37m-win32.whl", hash = "sha256:9e572c2ac3dd93f3f1a038a9226e7cc0d7326b8d345c9b9ce6fbf9cb9822e314"},
+    {url = "https://files.pythonhosted.org/packages/31/ea/9d53227d1ff58895bf84321aa6c1a2bf469fc3b9787a050823fa8c348274/debugpy-1.6.2-cp37-cp37m-win_amd64.whl", hash = "sha256:ac5d9e625d291a041ff3eaf65bdb816eb79a5b204cf9f1ffaf9617c0eadf96fa"},
+    {url = "https://files.pythonhosted.org/packages/3e/d5/02f81ad55b44ecd97bdc104bc9c23462042d07126120d625f4d717136cd8/debugpy-1.6.2-cp38-cp38-macosx_10_15_x86_64.whl", hash = "sha256:9f72435bc9a2026a35a41221beff853dd4b6b17567ba9b9d349ee9512eb71ce6"},
+    {url = "https://files.pythonhosted.org/packages/8b/6e/0dd5f73255333989f918b03cfdf3a70a3fe5b8ada0f8cc30be0431398603/debugpy-1.6.2-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:aaf579de5ecd02634d601d7cf5b6baae5f5bab89a55ef78e0904d766ef477729"},
+    {url = "https://files.pythonhosted.org/packages/22/8d/96eb6378e2d33c0633a9c6d2e17def2d49f34056ec10e323b365903c0d16/debugpy-1.6.2-cp38-cp38-win32.whl", hash = "sha256:0984086a670f46c75b5046b39a55f34e4120bee78928ac4c3c7f1c7b8be1d8be"},
+    {url = "https://files.pythonhosted.org/packages/5e/64/a04743e50efc64318da89110c1838c04f8734c4e6b16b5cc272f9168f81d/debugpy-1.6.2-cp38-cp38-win_amd64.whl", hash = "sha256:19337bb8ff87da2535ac00ea3877ceaf40ff3c681421d1a96ab4d67dad031a16"},
+    {url = "https://files.pythonhosted.org/packages/9c/fc/504a481fe70501ee19c6e4f07d2917a5cd32b73987a2c2bb07af6e12fffc/debugpy-1.6.2-cp39-cp39-macosx_10_15_x86_64.whl", hash = "sha256:163f282287ce68b00a51e9dcd7ad461ef288d740dcb3a2f22c01c62f31b62696"},
+    {url = "https://files.pythonhosted.org/packages/9c/e2/a45c0e1994c27d3b95ce46c7458d0305299007a730863924fc8a8f555066/debugpy-1.6.2-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:4909bb2f8e5c8fe33d6ec5b7764100b494289252ebe94ec7838b30467435f1cb"},
+    {url = "https://files.pythonhosted.org/packages/bc/35/2e5f49f9b6e91db561daa4cd18572fd9c941759f0bb89fa8580f83ee1507/debugpy-1.6.2-cp39-cp39-win32.whl", hash = "sha256:3b4657d3cd20aa454b62a70040524d3e785efc9a8488d16cd0e6caeb7b2a3f07"},
+    {url = "https://files.pythonhosted.org/packages/6d/c2/a46293c2afeff1d96cd8cfb8117947240225a826c43ed403cb203eb7e0df/debugpy-1.6.2-cp39-cp39-win_amd64.whl", hash = "sha256:79d9ac34542b830a7954ab111ad8a4c790f1f836b895d03223aea4216b739208"},
+    {url = "https://files.pythonhosted.org/packages/4a/fe/d4650161f8ee4966d7bffeb55c72ccb01273dbcf7a69ee8166ac9b2b9e2a/debugpy-1.6.2-py2.py3-none-any.whl", hash = "sha256:0bfdcf261f97a603d7ef7ab6972cdf7136201fde93d19bf3f917d0d2e43a5694"},
+    {url = "https://files.pythonhosted.org/packages/0c/b0/868f70211085d8db500cc5bb952b33e09aee0981ddf0cbdfe56d751be230/debugpy-1.6.2.zip", hash = "sha256:e6047272e97a11aa6898138c1c88c8cf61838deeb2a4f0a74e63bb567f8dafc6"},
 ]
 "envidat-utils 1.0.3" = [
-    {file = "envidat_utils-1.0.3-py3-none-any.whl", hash = "sha256:019659e1aad00c9223d1c7debdb5fa101eff5151dd1272891538e5551a6a646c"},
-    {file = "envidat-utils-1.0.3.tar.gz", hash = "sha256:5a78141ed8e48f2c0da699f2384700d2fc2f98939ad607019b6b40ee4194f34c"},
+    {url = "https://files.pythonhosted.org/packages/9b/52/012b4befcd1616985c593ae636edb39ce52487276c899db59b075c74bd2d/envidat-utils-1.0.3.tar.gz", hash = "sha256:5a78141ed8e48f2c0da699f2384700d2fc2f98939ad607019b6b40ee4194f34c"},
+    {url = "https://files.pythonhosted.org/packages/65/8b/189a7a2f3cbf23acabb6658f51a6d313a0e2d81a2237caf8417fe814331b/envidat_utils-1.0.3-py3-none-any.whl", hash = "sha256:019659e1aad00c9223d1c7debdb5fa101eff5151dd1272891538e5551a6a646c"},
 ]
 "idna 3.3" = [
-    {file = "idna-3.3-py3-none-any.whl", hash = "sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff"},
-    {file = "idna-3.3.tar.gz", hash = "sha256:9d643ff0a55b762d5cdb124b8eaa99c66322e2157b69160bc32796e824360e6d"},
+    {url = "https://files.pythonhosted.org/packages/04/a2/d918dcd22354d8958fe113e1a3630137e0fc8b44859ade3063982eacd2a4/idna-3.3-py3-none-any.whl", hash = "sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff"},
+    {url = "https://files.pythonhosted.org/packages/62/08/e3fc7c8161090f742f504f40b1bccbfc544d4a4e09eb774bf40aafce5436/idna-3.3.tar.gz", hash = "sha256:9d643ff0a55b762d5cdb124b8eaa99c66322e2157b69160bc32796e824360e6d"},
 ]
-"jmespath 1.0.0" = [
-    {file = "jmespath-1.0.0-py3-none-any.whl", hash = "sha256:e8dcd576ed616f14ec02eed0005c85973b5890083313860136657e24784e4c04"},
-    {file = "jmespath-1.0.0.tar.gz", hash = "sha256:a490e280edd1f57d6de88636992d05b71e97d69a26a19f058ecf7d304474bf5e"},
+"jmespath 1.0.1" = [
+    {url = "https://files.pythonhosted.org/packages/31/b4/b9b800c45527aadd64d5b442f9b932b00648617eb5d63d2c7a6587b7cafc/jmespath-1.0.1-py3-none-any.whl", hash = "sha256:02e2e4cc71b5bcab88332eebf907519190dd9e6e82107fa7f83b1003a6252980"},
+    {url = "https://files.pythonhosted.org/packages/00/2a/e867e8531cf3e36b41201936b7fa7ba7b5702dbef42922193f05c8976cd6/jmespath-1.0.1.tar.gz", hash = "sha256:90261b206d6defd58fdd5e85f478bf633a2901798906be2ad389150c5c60edbe"},
 ]
 "python-dateutil 2.8.2" = [
-    {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
-    {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
+    {url = "https://files.pythonhosted.org/packages/4c/c4/13b4776ea2d76c115c1d1b84579f3764ee6d57204f6be27119f13a61d0a9/python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
+    {url = "https://files.pythonhosted.org/packages/36/7a/87837f39d0296e723bb9b62bbb257d0355c7f6128853c78955f57342a56d/python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
 ]
 "python-dotenv 0.20.0" = [
-    {file = "python_dotenv-0.20.0-py3-none-any.whl", hash = "sha256:d92a187be61fe482e4fd675b6d52200e7be63a12b724abbf931a40ce4fa92938"},
-    {file = "python-dotenv-0.20.0.tar.gz", hash = "sha256:b7e3b04a59693c42c36f9ab1cc2acc46fa5df8c78e178fc33a8d4cd05c8d498f"},
+    {url = "https://files.pythonhosted.org/packages/02/ee/43e1c862a3e7259a1f264958eaea144f0a2fac9f175c1659c674c34ea506/python-dotenv-0.20.0.tar.gz", hash = "sha256:b7e3b04a59693c42c36f9ab1cc2acc46fa5df8c78e178fc33a8d4cd05c8d498f"},
+    {url = "https://files.pythonhosted.org/packages/30/5f/2e5c564bd86349fe6b82ca840f46acf6f4bb76d79ba9057fce3d3e008864/python_dotenv-0.20.0-py3-none-any.whl", hash = "sha256:d92a187be61fe482e4fd675b6d52200e7be63a12b724abbf931a40ce4fa92938"},
 ]
-"requests 2.27.1" = [
-    {file = "requests-2.27.1-py2.py3-none-any.whl", hash = "sha256:f22fa1e554c9ddfd16e6e41ac79759e17be9e492b3587efa038054674760e72d"},
-    {file = "requests-2.27.1.tar.gz", hash = "sha256:68d7c56fd5a8999887728ef304a6d12edc7be74f1cfa47714fc8b414525c9a61"},
+"requests 2.28.1" = [
+    {url = "https://files.pythonhosted.org/packages/ca/91/6d9b8ccacd0412c08820f72cebaa4f0c0441b5cda699c90f618b6f8a1b42/requests-2.28.1-py3-none-any.whl", hash = "sha256:8fefa2a1a1365bf5520aac41836fbee479da67864514bdb821f31ce07ce65349"},
+    {url = "https://files.pythonhosted.org/packages/a5/61/a867851fd5ab77277495a8709ddda0861b28163c4613b011bc00228cc724/requests-2.28.1.tar.gz", hash = "sha256:7c5599b102feddaa661c826c56ab4fee28bfd17f5abca1ebbe3e7f19d7c97983"},
 ]
 "s3transfer 0.6.0" = [
-    {file = "s3transfer-0.6.0-py3-none-any.whl", hash = "sha256:06176b74f3a15f61f1b4f25a1fc29a4429040b7647133a463da8fa5bd28d5ecd"},
-    {file = "s3transfer-0.6.0.tar.gz", hash = "sha256:2ed07d3866f523cc561bf4a00fc5535827981b117dd7876f036b0c1aca42c947"},
+    {url = "https://files.pythonhosted.org/packages/5e/c6/af903b5fab3f9b5b1e883f49a770066314c6dcceb589cf938d48c89556c1/s3transfer-0.6.0-py3-none-any.whl", hash = "sha256:06176b74f3a15f61f1b4f25a1fc29a4429040b7647133a463da8fa5bd28d5ecd"},
+    {url = "https://files.pythonhosted.org/packages/e1/eb/e57c93d5cd5edf8c1d124c831ef916601540db70acd96fa21fe60cef1365/s3transfer-0.6.0.tar.gz", hash = "sha256:2ed07d3866f523cc561bf4a00fc5535827981b117dd7876f036b0c1aca42c947"},
 ]
 "six 1.16.0" = [
-    {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
-    {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
+    {url = "https://files.pythonhosted.org/packages/d9/5a/e7c31adbe875f2abbb91bd84cf2dc52d792b5a01506781dbcf25c91daf11/six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
+    {url = "https://files.pythonhosted.org/packages/71/39/171f1c67cd00715f190ba0b100d606d440a28c93c7714febeca8b79af85e/six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
 ]
-"urllib3 1.26.9" = [
-    {file = "urllib3-1.26.9-py2.py3-none-any.whl", hash = "sha256:44ece4d53fb1706f667c9bd1c648f5469a2ec925fcf3a776667042d645472c14"},
-    {file = "urllib3-1.26.9.tar.gz", hash = "sha256:aabaf16477806a5e1dd19aa41f8c2b7950dd3c746362d7e3223dbe6de6ac448e"},
+"urllib3 1.26.10" = [
+    {url = "https://files.pythonhosted.org/packages/68/47/93d3d28e97c7577f563903907912f4b3804054e4877a5ba6651f7182c53b/urllib3-1.26.10-py2.py3-none-any.whl", hash = "sha256:8298d6d56d39be0e3bc13c1c97d133f9b45d797169a0e11cdd0e0489d786f7ec"},
+    {url = "https://files.pythonhosted.org/packages/25/36/f056e5f1389004cf886bb7a8514077f24224238a7534497c014a6b9ac770/urllib3-1.26.10.tar.gz", hash = "sha256:879ba4d1e89654d9769ce13121e0f94310ea32e8d2f8cf587b77c08bbcdb30d6"},
 ]
