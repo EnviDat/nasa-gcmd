@@ -1,9 +1,11 @@
-import os
+"""Main script to execute directly."""
+
 import logging
 
 from time import sleep
 
-from envidat.api.v1 import get_metadata_list, _get_url
+from envidat.api.v1 import get_metadata_list
+from envidat.metadata import Record
 from envidat.s3.bucket import Bucket
 from envidat.utils import get_logger, load_dotenv_if_in_debug_mode
 
@@ -11,21 +13,8 @@ from envidat.utils import get_logger, load_dotenv_if_in_debug_mode
 log = logging.getLogger(__name__)
 
 
-def get_ckan_package_xml(
-    package_name: str,
-):
-    "Download package XML from CKAN host."
-
-    # TODO remove function and generate XML manually
-    host = os.getenv("API_URL", default="https://www.envidat.ch")
-    url = f"{host}/dataset/{package_name}/export/gcmd_dif.xml"
-    log.debug(f"CKAN url to download: {url}")
-    return _get_url(url).content
-
-
 def main():
-    "Main script logic."
-
+    """For direct execution of file."""
     load_dotenv_if_in_debug_mode(env_file=".env.secret")
     get_logger()
 
@@ -40,8 +29,8 @@ def main():
     log.info(f"Found {len(missing_packages)} missing packages in bucket.")
 
     for package_name in missing_packages:
-        xml = get_ckan_package_xml(package_name)
-        s3_bucket.put(f"{package_name}.xml", xml)
+        xml_str = Record(package_name, convert="xml").content
+        s3_bucket.put(f"{package_name}.xml", xml_str)
         # Take it easy on the API!
         log.debug("Sleeping 5 seconds...")
         sleep(5)
