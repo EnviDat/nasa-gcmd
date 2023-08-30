@@ -14,7 +14,7 @@ set-vars:
     - cat .env >> build.env
     - source build.env
     - >
-      echo "IMAGE_NAME=${INTERNAL_REG}/nasa-gcmd:${APP_VERSION}-${CI_COMMIT_REF_NAME}"
+      echo "IMAGE_NAME=${INTERNAL_REG}/${APP_NAME}:${APP_VERSION}-${CI_COMMIT_REF_NAME}"
       >> build.env
   artifacts:
     reports:
@@ -23,7 +23,7 @@ set-vars:
 image-build:
   stage: build
   image:
-    name: gcr.io/kaniko-project/executor:debug
+    name: gcr.io/kaniko-project/executor:v1.8.1-debug
     entrypoint: [""]
   before_script:
     - >
@@ -107,5 +107,5 @@ image-retag:
       "${IMAGE_NAME}-unverified" "${IMAGE_NAME}"
     - >
       regctl --verbosity debug image copy
-      "${IMAGE_NAME}" "${INTERNAL_REG}/nasa-gcmd:latest"
+      "${IMAGE_NAME}" "${INTERNAL_REG}/${APP_NAME}:latest"
     - regctl --verbosity debug tag delete "${IMAGE_NAME}-unverified"
